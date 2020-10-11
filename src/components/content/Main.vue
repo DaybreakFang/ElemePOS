@@ -2,7 +2,7 @@
   <div class="main">
     <el-row class="main-row">
       <el-col :span="7" class="order">
-        <el-tabs type="border-card">
+        <el-tabs type="card">
           <el-tab-pane label="点餐" style="width: 100%">
             <el-table :data="tableData" stripe border style="width: 100%">
               <el-table-column
@@ -26,7 +26,7 @@
             </el-table>
             <div class="cal-btn">
               <el-button type="warning" round size="medium">挂单</el-button>
-              <el-button type="danger"  round size="medium">清空</el-button>
+              <el-button type="danger" round size="medium">清空</el-button>
               <el-button type="success" round size="medium">结账</el-button>
             </div>
           </el-tab-pane>
@@ -35,7 +35,50 @@
         </el-tabs>
       </el-col>
 
-      <el-col>dk</el-col>
+      <el-col :span="17">
+        <div class="often-goods">
+          <div class="often-title">热销商品</div>
+          <div class="often-goods-list">
+            <ul>
+              <li v-for="goods in oftenGoods" :key="goods.goodsId">
+                <span>{{ goods.goodsName }}</span>
+                <span class="o-price"> ¥ {{ goods.price }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="goods-type">
+            <el-tabs type="card">
+              <el-tab-pane label="汉堡">
+                <div class="cooklist">
+                  <ul>
+                    <li v-for="goods in type0Goods" :key="goods.goodsId">
+                      <el-card :body-style="{  }" shadow="hover">
+                        <img
+                          :src="goods.goodsImg"
+                          width="70%"
+                        />
+                        <div style="padding: 10px">
+                          <span>{{ goods.goodsName }}</span>
+                          <span class="o-price"> ￥{{ goods.price }}</span>
+                        </div>
+                      </el-card>
+                      <!-- <span class="foodImg"
+                        ><img :src="goods.goodsImg" width="100%"
+                      /></span>
+                      <span class="foodName">{{ goods.goodsName }}</span>
+                      <span class="foodPrice">￥{{ goods.price }}元</span> -->
+                    </li>
+                  </ul>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="小食"> </el-tab-pane>
+              <el-tab-pane label="饮料"> </el-tab-pane>
+              <el-tab-pane label="套餐"> </el-tab-pane>
+            </el-tabs>
+          </div>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -67,6 +110,102 @@ export default {
           count: 1,
         },
       ],
+      oftenGoods: [
+        {
+          goodsId: 1,
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+        {
+          goodsId: 2,
+          goodsName: "田园鸡腿堡",
+          price: 15,
+        },
+        {
+          goodsId: 3,
+          goodsName: "和风汉堡",
+          price: 15,
+        },
+        {
+          goodsId: 4,
+          goodsName: "快乐全家桶",
+          price: 80,
+        },
+        {
+          goodsId: 5,
+          goodsName: "脆皮炸鸡腿",
+          price: 10,
+        },
+        {
+          goodsId: 6,
+          goodsName: "魔法鸡块",
+          price: 20,
+        },
+        {
+          goodsId: 7,
+          goodsName: "可乐大杯",
+          price: 10,
+        },
+        {
+          goodsId: 8,
+          goodsName: "雪顶咖啡",
+          price: 18,
+        },
+        {
+          goodsId: 9,
+          goodsName: "大块鸡米花",
+          price: 15,
+        },
+        {
+          goodsId: 20,
+          goodsName: "香脆鸡柳",
+          price: 17,
+        },
+      ],
+      type0Goods: [
+        {
+          goodsId: 1,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+        {
+          goodsId: 2,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+        {
+          goodsId: 3,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+         {
+          goodsId: 4,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+        {
+          goodsId: 5,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+        {
+          goodsId: 6,
+          goodsImg:
+            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
+          goodsName: "香辣鸡腿堡",
+          price: 18,
+        },
+      ],
     };
   },
 };
@@ -84,11 +223,44 @@ export default {
 }
 .cal-btn {
   margin-top: 15px;
-  /* border: 1px solid; */
   display: flex;
   justify-content: center;
-  /* margin: 0 auto;
-  text-align: center;
-  display: inline-block */
+}
+.often-goods {
+  width: 100%;
+}
+.often-title {
+  background-color: #f4f7fa;
+  border-bottom: 1px solid #d3dce6;
+  padding: 10px;
+  width: 100%;
+  color: #1d8ce0;
+  font-weight: bold;
+}
+
+.often-goods-list ul li {
+  border: 1px solid #e5e9f2;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+  display: inline-block;
+}
+.o-price {
+  border-radius: 50%;
+  color: #1d8ce0;
+  font-weight: bold;
+}
+.cooklist ul{
+    display: flex;
+flex-flow: row wrap;
+list-style: none;
+padding: 10px;
+}
+.cooklist li {
+  width: 20%;
+padding: 10px;
+text-align: center;
+  /* border: solid 1px #e5e9f2; */
+  border-radius: 4px
 }
 </style>
