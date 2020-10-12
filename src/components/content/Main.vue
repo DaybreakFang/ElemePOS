@@ -50,8 +50,8 @@
             </div>
             <div class="cal-btn">
               <el-button type="warning" round size="medium">挂单</el-button>
-              <el-button type="danger" round size="medium">清空</el-button>
-              <el-button type="success" round size="medium">结账</el-button>
+              <el-button type="danger" round size="medium" @click="deleteAll">清空</el-button>
+              <el-button type="success" round size="medium" @click="checkout">结账</el-button>
             </div>
           </el-tab-pane>
           <el-tab-pane label="挂单"> </el-tab-pane>
@@ -224,7 +224,26 @@ export default {
         this.tableData.push(newgoods);
       }
     },
+    deleteGoods(goods) {
+    this.tableData=this.tableData.filter(o => o.goodsId !=goods.goodsId);
+
   },
+  deleteAll(){
+    this.tableData = []
+  },
+  checkout(){
+    if(this.totalCount != 0){
+      this.tableData = [];
+      this.$message({
+          message: '恭喜你，结账成功',
+          type: 'success'
+        });
+    }else{
+        this.$message.error('还没有订单哦');
+    }
+  }
+  },
+  
 };
 </script>
 
@@ -253,7 +272,6 @@ export default {
   display: flex;
   justify-content:space-around;
   border-bottom: 1px solid #d3dce6;
-  
 }
 
 .often-goods {
