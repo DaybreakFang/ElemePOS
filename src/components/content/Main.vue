@@ -63,18 +63,60 @@
                           <span class="o-price"> ￥{{ goods.price }}</span>
                         </div>
                       </el-card>
-                      <!-- <span class="foodImg"
-                        ><img :src="goods.goodsImg" width="100%"
-                      /></span>
-                      <span class="foodName">{{ goods.goodsName }}</span>
-                      <span class="foodPrice">￥{{ goods.price }}元</span> -->
                     </li>
                   </ul>
                 </div>
               </el-tab-pane>
-              <el-tab-pane label="小食"> </el-tab-pane>
-              <el-tab-pane label="饮料"> </el-tab-pane>
-              <el-tab-pane label="套餐"> </el-tab-pane>
+              <el-tab-pane label="小食">
+                <div class="cooklist">
+                  <ul>
+                    <li v-for="goods in type1Goods" :key="goods.goodsId">
+                      <el-card :body-style="{  }" shadow="hover">
+                        <img
+                          :src="goods.goodsImg"
+                          width="70%"
+                        />
+                        <div style="padding: 10px">
+                          <span>{{ goods.goodsName }}</span>
+                          <span class="o-price"> ￥{{ goods.price }}</span>
+                        </div>
+                      </el-card>
+                    </li>
+                  </ul>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="饮料"><div class="cooklist">
+                  <ul>
+                    <li v-for="goods in type2Goods" :key="goods.goodsId">
+                      <el-card :body-style="{  }" shadow="hover">
+                        <img
+                          :src="goods.goodsImg"
+                          width="70%"
+                        />
+                        <div style="padding: 10px">
+                          <span>{{ goods.goodsName }}</span>
+                          <span class="o-price"> ￥{{ goods.price }}</span>
+                        </div>
+                      </el-card>
+                    </li>
+                  </ul>
+                </div></el-tab-pane>
+              <el-tab-pane label="套餐"><div class="cooklist">
+                  <ul>
+                    <li v-for="goods in type3Goods" :key="goods.goodsId">
+                      <el-card :body-style="{  }" shadow="hover">
+                        <img
+                          :src="goods.goodsImg"
+                          width="70%"
+                        />
+                        <div style="padding: 10px">
+                          <span>{{ goods.goodsName }}</span>
+                          <span class="o-price"> ￥{{ goods.price }}</span>
+                        </div>
+                      </el-card>
+                    </li>
+                  </ul>
+                </div></el-tab-pane>
             </el-tabs>
           </div>
         </div>
@@ -84,130 +126,30 @@
 </template>
 
 <script>
+import {getOftenData,getTypeGoodsData} from 'network/home'
 export default {
   name: "Main",
   data() {
     return {
-      tableData: [
-        {
-          goodsName: "可口可乐",
-          price: 8,
-          count: 1,
-        },
-        {
-          goodsName: "香辣鸡腿堡",
-          price: 15,
-          count: 1,
-        },
-        {
-          goodsName: "爱心薯条",
-          price: 8,
-          count: 1,
-        },
-        {
-          goodsName: "甜筒",
-          price: 8,
-          count: 1,
-        },
-      ],
-      oftenGoods: [
-        {
-          goodsId: 1,
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-        {
-          goodsId: 2,
-          goodsName: "田园鸡腿堡",
-          price: 15,
-        },
-        {
-          goodsId: 3,
-          goodsName: "和风汉堡",
-          price: 15,
-        },
-        {
-          goodsId: 4,
-          goodsName: "快乐全家桶",
-          price: 80,
-        },
-        {
-          goodsId: 5,
-          goodsName: "脆皮炸鸡腿",
-          price: 10,
-        },
-        {
-          goodsId: 6,
-          goodsName: "魔法鸡块",
-          price: 20,
-        },
-        {
-          goodsId: 7,
-          goodsName: "可乐大杯",
-          price: 10,
-        },
-        {
-          goodsId: 8,
-          goodsName: "雪顶咖啡",
-          price: 18,
-        },
-        {
-          goodsId: 9,
-          goodsName: "大块鸡米花",
-          price: 15,
-        },
-        {
-          goodsId: 20,
-          goodsName: "香脆鸡柳",
-          price: 17,
-        },
-      ],
-      type0Goods: [
-        {
-          goodsId: 1,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-        {
-          goodsId: 2,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-        {
-          goodsId: 3,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-         {
-          goodsId: 4,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-        {
-          goodsId: 5,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-        {
-          goodsId: 6,
-          goodsImg:
-            "https://img.4008823823.com.cn/kfcios/Version/621_626971.jpg",
-          goodsName: "香辣鸡腿堡",
-          price: 18,
-        },
-      ],
+      tableData: [],
+      oftenGoods: [],
+      type0Goods: [],
+      type1Goods: [],
+      type2Goods: [],
+      type3Goods: []
     };
   },
+  created(){
+    getOftenData().then(res=>{
+      this.oftenGoods = res.oftenGoods
+    }),
+    getTypeGoodsData().then(res => {
+      this.type0Goods = res.data[0]
+      this.type1Goods = res.data[1]
+      this.type2Goods = res.data[2]
+      this.type3Goods = res.data[3]
+    })
+  }
 };
 </script>
 
